@@ -1,4 +1,4 @@
-import Counter from './Counter';
+import Counter from '../Counter/Counter.jsx';
 
 export default function ProductCard({ product, quantity, order, setOrder }) {
     return (

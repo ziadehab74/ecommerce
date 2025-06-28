@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import axios from 'axios';
-import Counter from './counter.jsx';
+import Counter from '../Counter/Counter';
 
 export default function Ordersummary({ order, products, handleIncrement, handleDecrement, setOrder, cart = false }) {
     if (Object.keys(order).length === 0) return null;

@@ -1,4 +1,4 @@
-import Counter from '../Counter';
+import Counter from '../Counter/Counter';
 
 export default function CartItem({ item, order, setOrder }) {
     return (

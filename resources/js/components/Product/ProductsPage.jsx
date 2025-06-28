@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import ProductList from './ProductList';
-import SidebarFilters from './SidebarFilters';
+import SidebarFilters from './SideBarFilter.jsx';
 import SearchInput from './SearchInput';
-import Ordersummary from './Ordersummary';
-import useProductFilter from '../hooks/useProductFilter';
+import Ordersummary from '../OrderSummary/OrderSummary';
+import useProductFilter from '../Product/hooks/useProductFilter';
 import axios from 'axios';
 
 export default function ProductsPage() {

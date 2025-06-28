@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import AuthButton from './AuthButton';
+import AuthButton from '../../AuthButton.jsx';
 
 export default function Navbar() {
     return (

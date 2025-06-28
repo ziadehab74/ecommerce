@@ -1,6 +1,6 @@
-import Ordersummary from '../Ordersummary.jsx';
+import Ordersummary from '../OrderSummary/OrderSummary.jsx';
 import CartItemList from './CartItemList.jsx';
-import useCartData from '../../hooks/useCartData.js';
+import useCartData from '../Cart/hooks/useCartData.js';
 
 export default function CartPage() {
     const { order, setOrder, products, cartItems } = useCartData();
