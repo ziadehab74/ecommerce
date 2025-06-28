@@ -12,12 +12,12 @@ export default function Products() {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [priceRange, setPriceRange] = useState([MIN, MAX]);
-    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState([]); // Changed to array
     const [showSidebar, setShowSidebar] = useState(false);
     const [appliedFilters, setAppliedFilters] = useState({
         searchTerm: '',
         priceRange: [MIN, MAX],
-        category: ''
+        category: []
     });
 
     const [order, setOrder] = useState(() => {
@@ -51,7 +51,9 @@ export default function Products() {
 
     const filteredProducts = products.filter(product => {
         const matchesSearch = product.name.toLowerCase().includes(appliedFilters.searchTerm.toLowerCase());
-        const matchesCategory = appliedFilters.category === '' || product.category === appliedFilters.category;
+        const matchesCategory =
+            appliedFilters.category.length === 0 ||
+            appliedFilters.category.includes(product.category);
         const matchesPrice =
             product.price >= appliedFilters.priceRange[0] &&
             product.price <= appliedFilters.priceRange[1];
@@ -84,21 +86,6 @@ export default function Products() {
                     <button className="btn-close" onClick={() => setShowSidebar(false)}></button>
                 </div>
 
-                {/* Category */}
-                <div className="mb-3">
-                    <label className="form-label">Category</label>
-                    <select
-                        className="form-select"
-                        value={selectedCategory}
-                        onChange={e => setSelectedCategory(e.target.value)}
-                    >
-                        <option value="">All Categories</option>
-                        {categories.map((cat, i) => (
-                            <option key={i} value={cat}>{cat}</option>
-                        ))}
-                    </select>
-                </div>
-
                 {/* Price Range Slider */}
                 <div className="mb-3">
                     <label className="form-label d-block">
@@ -117,7 +104,7 @@ export default function Products() {
                                     ...props.style,
                                     height: '6px',
                                     width: '100%',
-                                    backgroundColor: '#ddd',
+                                    backgroundColor: '#d3d4d5',
                                     borderRadius: '3px',
                                     marginTop: '10px',
                                     position: 'relative',
@@ -127,7 +114,7 @@ export default function Products() {
                                     style={{
                                         position: 'absolute',
                                         height: '6px',
-                                        background: '#0d6efd',
+                                        background: 'black',
                                         borderRadius: '3px',
                                         left: `${((priceRange[0] - MIN) / (MAX - MIN)) * 100}%`,
                                         width: `${((priceRange[1] - priceRange[0]) / (MAX - MIN)) * 100}%`,
@@ -143,7 +130,7 @@ export default function Products() {
                                     ...props.style,
                                     height: '16px',
                                     width: '16px',
-                                    backgroundColor: '#0d6efd',
+                                    backgroundColor: 'black',
                                     borderRadius: '50%',
                                     outline: 'none',
                                 }}
@@ -152,10 +139,41 @@ export default function Products() {
                     />
                 </div>
 
-                {/* Buttons */}
+                {/* Category Filters */}
+                <div className="mb-3">
+                    <label className="form-label">Category</label>
+                    <div>
+                        {categories.map((cat, i) => (
+                            <div key={i} className="form-check">
+                                <input
+                                    type="checkbox"
+                                    className="form-check-input"
+                                    style={{ accentColor: 'black' }}
+                                    id={`cat-${i}`}
+                                    value={cat}
+                                    checked={selectedCategory.includes(cat)}
+                                    onChange={(e) => {
+                                        const checked = e.target.checked;
+                                        setSelectedCategory(prev =>
+                                            checked
+                                                ? [...prev, cat]
+                                                : prev.filter(c => c !== cat)
+                                        );
+                                    }}
+                                />
+
+                                <label className="form-check-label" htmlFor={`cat-${i}`}>
+                                    {cat}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Filter Buttons */}
                 <div className="d-flex gap-2">
                     <button
-                        className="btn btn-primary w-100"
+                        className="btn background-black w-100"
                         onClick={() => {
                             setAppliedFilters({
                                 searchTerm,
@@ -171,12 +189,12 @@ export default function Products() {
                         className="btn btn-outline-secondary w-100"
                         onClick={() => {
                             setSearchTerm('');
-                            setSelectedCategory('');
+                            setSelectedCategory([]);
                             setPriceRange([MIN, MAX]);
                             setAppliedFilters({
                                 searchTerm: '',
                                 priceRange: [MIN, MAX],
-                                category: '',
+                                category: [],
                             });
                             setShowSidebar(false);
                         }}
@@ -185,8 +203,6 @@ export default function Products() {
                     </button>
                 </div>
             </div>
-
-            {/* Page Header with Search */}
 
             {/* Product Grid & Order Summary */}
             <div className="row">

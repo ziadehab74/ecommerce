@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
@@ -20,6 +20,7 @@ function App() {
 
                 {/* SPA Routes */}
                 <Routes>
+                    <Route path="/" element={<Navigate to="/products" replace />} /> {/* 👈 redirect */}
                     <Route path="/login" element={<Login />} />
                     <Route path="/products" element={<Products />} />
                     <Route path="/cart" element={<Cart />} />
