@@ -11,7 +11,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>React in Laravel</title>
+    <title>E-commerce</title>
     @viteReactRefresh
     @vite('resources/js/app.jsx')
 </head>
