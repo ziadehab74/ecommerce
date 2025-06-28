@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class OrderController extends Controller
 {
@@ -51,6 +52,7 @@ class OrderController extends Controller
         // event(new \App\Events\OrderPlaced($order));
 
         return response()->json(['message' => 'Order placed successfully.', 'order_id' => $order->id]);
+        Cache::forget('orders');
     }
 
     public function show($id)

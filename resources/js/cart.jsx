@@ -80,6 +80,7 @@ export default function Cart() {
                                 order={order}
                                 products={products}
                                 setOrder={setOrder}
+                                cart={true}
                             />
                         </div>
                     </div>
