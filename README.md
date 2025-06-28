@@ -47,8 +47,8 @@
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/laravel-react-ecommerce.git
-   cd laravel-react-ecommerce
+   git clone https://github.com/ziadehab74/ecommerce.git
+   cd ecommerce
    ```
 
 2. **Backend (Laravel):**
