@@ -33,8 +33,7 @@
 
 * React frontend is integrated into the Laravel codebase:
 
-  * Preferred: `resources/js/` compiled with Vite.
-  * Alternative: Built separately and output to `public/`.
+  *`resources/js/` compiled with Vite.
 
 ## Getting Started
 
