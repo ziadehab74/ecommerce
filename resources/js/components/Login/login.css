@@ -1,0 +1,48 @@
+/* login.css */
+
+/* Main container */
+.login-container {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+/* Login card styling */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Toggle icon styling */
+.toggle-password-icon {
+  position: absolute;
+  top: 38px;
+  right: 10px;
+  cursor: pointer;
+  color: #6c757d;
+}
+
+/* Small screens (mobile) */
+@media (max-width: 576px) {
+  .login-container {
+    display: block;
+    padding: 1rem;
+  }
+
+  .login-card {
+    width: 100%;
+    padding: 0;
+    box-shadow: none;
+    background-color: transparent;
+    border: none;
+  }
+}

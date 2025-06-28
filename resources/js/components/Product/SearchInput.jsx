@@ -1,6 +1,6 @@
 export default function SearchInput({ searchTerm, onChange }) {
     return (
-        <div className="mb-4">
+        <div className="mb-1">
             <input
                 type="text"
                 className="form-control"

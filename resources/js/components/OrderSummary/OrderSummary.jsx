@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import axios from 'axios';
-import Counter from '../Counter/Counter';
+import Counter from '../Counter/Counter.jsx';
 
 export default function Ordersummary({ order, products, handleIncrement, handleDecrement, setOrder, cart = false }) {
     if (Object.keys(order).length === 0) return null;
@@ -25,14 +25,14 @@ export default function Ordersummary({ order, products, handleIncrement, handleD
                 id: parseInt(productId),        // ✅ Use "id" instead of "product_id"
                 quantity
             }));
-            console.log(items,total);
+            console.log(items, total);
 
             const response = await axios.post(`${window.Laravel.appUrl}/api/orders`, {
                 products: items,
                 subtotal,
                 tax,
                 shipping,
-                total:total
+                total: total
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -52,7 +52,7 @@ export default function Ordersummary({ order, products, handleIncrement, handleD
     };
 
     return (
-        <div className="bg-white rounded shadow-sm">
+        <div className="bg-white rounded shadow-sm m2 p-2">
             <h5 className="p-2 m-2 fw-semibold">
                 Order Summary {cart ? <span>(#{Object.keys(order).length})</span> : ''}
             </h5>
@@ -63,12 +63,14 @@ export default function Ordersummary({ order, products, handleIncrement, handleD
                         <div className="d-flex justify-content-between align-items-center">
                             <img src={p.image_url} alt={p.name} height="70" />
                             <div className="row align-items-center ps-3">
-                                <div className="col">
+                                <div className="row">
                                     <small className="fw-semibold">{p.name}</small>
+
+                                    <div className="col-auto m-1">
+                                        <Counter product={p} order={order} setOrder={setOrder} />
+                                    </div>
                                 </div>
-                                <div className="col-auto">
-                                    <Counter product={p} order={order} setOrder={setOrder} />
-                                </div>
+
                             </div>
                             <a
                                 style={{ color: 'red', cursor: 'pointer' }}

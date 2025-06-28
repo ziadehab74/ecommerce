@@ -21,8 +21,8 @@ export default function SidebarFilters({ filters, setFilters, products }) {
 
     return (
         <>
-            <button className="btn btn-outline-dark position-fixed top-50 start-0 translate-middle-y z-3" onClick={() => setShow(!show)}>
-                Filters
+            <button className="btn btn-xl position-fixed top-50 start-0 translate-middle-y z-3" onClick={() => setShow(!show)} style={{backgroundColor:'white' ,height:'50px' , width:'60px'} }>
+                  <i className="bi bi-funnel-fill" style={{fontSize:'30px', color:'black'}}></i>
             </button>
 
             <div className={`position-fixed top-0 start-0 h-100 bg-white shadow p-4 overflow-auto`} style={{

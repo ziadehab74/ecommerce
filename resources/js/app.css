@@ -2,6 +2,16 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+html,
+body,
+#root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #f8f9fa;
+    /* light background */
+}
+
 .background-black {
     background-color: black;
     color: white;
@@ -10,4 +20,14 @@ body {
 .background-black:hover {
     background-color: black;
     color: white;
+}
+
+/* login.css or global styles */
+
+
+/* On smaller screens, increase size slightly */
+@media (max-width: 576px) {
+    .login-card {
+        transform: scale(1.05);
+    }
 }

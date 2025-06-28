@@ -1,10 +1,10 @@
-import Counter from '../Counter/Counter';
+import Counter from '../Counter/Counter.jsx';
 
 export default function CartItem({ item, order, setOrder }) {
     return (
-        <div className="list-group-item d-flex">
+        <div className="list-group-item d-flex ">
             <div className="col-md-4 p-2">
-                <img src={item.image} alt={item.name} width="100px" />
+                <img src={item.image_url} alt={item.name} width="100px" />
             </div>
             <div className="col-md-8 d-flex flex-column justify-content-between">
                 <div>

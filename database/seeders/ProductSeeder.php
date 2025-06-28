@@ -22,28 +22,28 @@ class ProductSeeder extends Seeder
                 'price' => 89.99,
                 'category' => 'Electronics',
                 'stock' => 30,
-                'image' => 'products/headphones.jpg',
+                'image' => 'products/headphones.webp',
             ],
             [
                 'name' => 'Coffee Mug',
                 'price' => 12.49,
                 'category' => 'Kitchen',
                 'stock' => 100,
-                'image' => 'products/mug.jpg',
+                'image' => 'products/cofemug.jpg',
             ],
             [
                 'name' => 'Desk Lamp',
                 'price' => 39.95,
                 'category' => 'Office',
                 'stock' => 25,
-                'image' => 'products/lamp.jpg',
+                'image' => 'products/desklamp.jpg',
             ],
             [
                 'name' => 'Notebook',
                 'price' => 4.99,
                 'category' => 'Stationery',
                 'stock' => 200,
-                'image' => 'products/notebook.jpg',
+                'image' => 'products/notebook.webp',
             ],
         ];
 

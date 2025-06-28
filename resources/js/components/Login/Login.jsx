@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom'; // ✅ Import React Router navigation
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import './login.css';
 
 export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
@@ -8,7 +9,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate(); // ✅ Initialize navigation
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
@@ -32,8 +33,6 @@ export default function Login() {
 
             localStorage.setItem('user', JSON.stringify(response.data.user));
             localStorage.setItem('token', response.data.token);
-
-            // ✅ Redirect after login (SPA-style)
             navigate('/products');
         } catch (err) {
             setError(err.response?.data?.message || 'Login failed');
@@ -43,9 +42,9 @@ export default function Login() {
     };
 
     return (
-        <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-            <div className="bg-white p-4 rounded-3 shadow" style={{ width: '100%', maxWidth: '400px' }}>
-                <h2 className="text-center fw-semibold">Welcome back</h2>
+        <div className="login-container">
+            <div className="login-card">
+                <h2 className="text-center fw-semibold mb-2">Welcome back</h2>
                 <p className="text-center text-muted mb-4">Please enter your details to sign in</p>
 
                 {error && <div className="alert alert-danger">{error}</div>}
@@ -75,19 +74,12 @@ export default function Login() {
                             required
                         />
                         <i
-                            className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`}
+                            className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'} toggle-password-icon`}
                             onClick={() => setShowPassword(!showPassword)}
-                            style={{
-                                position: 'absolute',
-                                top: '38px',
-                                right: '10px',
-                                cursor: 'pointer',
-                                color: '#6c757d'
-                            }}
                         ></i>
                     </div>
                     <div className="d-grid">
-                        <button type="submit" className="btn btn-dark" disabled={loading}>
+                        <button type="submit" className="btn btn-dark py-2" disabled={loading}>
                             {loading ? 'Logging in...' : 'Login'}
                         </button>
                     </div>
@@ -96,3 +88,4 @@ export default function Login() {
         </div>
     );
 }
+    
