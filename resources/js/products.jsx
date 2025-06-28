@@ -36,7 +36,7 @@ export default function Products() {
     }, [products]);
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/products')
+        axios.get(`${window.Laravel.appUrl}/api/products`)
             .then(response => {
                 setProducts(response.data.data);
                 setLoading(false);

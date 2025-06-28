@@ -27,7 +27,7 @@ export default function Ordersummary({ order, products, handleIncrement, handleD
             }));
             console.log(items,total);
 
-            const response = await axios.post('http://localhost:8000/api/orders', {
+            const response = await axios.post(`${window.Laravel.appUrl}/api/orders`, {
                 products: items,
                 subtotal,
                 tax,

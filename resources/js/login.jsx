@@ -23,9 +23,9 @@ export default function Login() {
         setLoading(true);
 
         try {
-            await axios.get('http://localhost:8000/sanctum/csrf-cookie');
+            await axios.get(`${window.Laravel.appUrl}/sanctum/csrf-cookie`, { withCredentials: true });
 
-            const response = await axios.post('http://localhost:8000/api/login', {
+            const response = await axios.post(`${window.Laravel.appUrl}/api/login`, {
                 email,
                 password
             });
@@ -34,7 +34,7 @@ export default function Login() {
             localStorage.setItem('token', response.data.token);
 
             // ✅ Redirect after login (SPA-style)
-        navigate('/products');
+            navigate('/products');
         } catch (err) {
             setError(err.response?.data?.message || 'Login failed');
         } finally {

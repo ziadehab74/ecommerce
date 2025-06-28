@@ -9,7 +9,7 @@ import Header from './header.jsx';
 import Navbar from './navbar.jsx';
 import Login from './login.jsx';
 import Products from './products.jsx';
-import Cart from './cart.jsx'; 
+import Cart from './cart.jsx';
 
 function App() {
     return (
