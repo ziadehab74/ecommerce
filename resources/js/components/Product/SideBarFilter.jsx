@@ -6,9 +6,9 @@ export default function SidebarFilters({ filters, setFilters, products = [] }) {
     const [localFilters, setLocalFilters] = useState(filters);
     const [show, setShow] = useState(false);
 
-    // ✅ Safely map categories only if products is an array
+    // ✅ Safely extract unique categories
     const categories = Array.isArray(products)
-        ? [...new Set(products.map(p => p.category))].filter(Boolean)
+        ? [...new Set(products.map(p => p?.category))].filter(Boolean)
         : [];
 
     const applyFilters = () => {
@@ -23,7 +23,7 @@ export default function SidebarFilters({ filters, setFilters, products = [] }) {
         setShow(false);
     };
 
-    // Lock scroll when sidebar is open
+    // ✅ Lock/unlock body scroll
     useEffect(() => {
         document.body.style.overflow = show ? 'hidden' : 'auto';
         return () => {
@@ -33,7 +33,7 @@ export default function SidebarFilters({ filters, setFilters, products = [] }) {
 
     return (
         <>
-            {/* Filter Toggle Button */}
+            {/* Toggle Filter Sidebar Button */}
             <button
                 className="btn btn-xl position-fixed top-50 start-0 translate-middle-y z-3"
                 onClick={() => setShow(!show)}
@@ -51,7 +51,7 @@ export default function SidebarFilters({ filters, setFilters, products = [] }) {
                 />
             )}
 
-            {/* Sidebar */}
+            {/* Sidebar Panel */}
             <div
                 className="position-fixed top-0 start-0 h-100 bg-white shadow p-4 overflow-auto"
                 style={{
@@ -129,7 +129,7 @@ export default function SidebarFilters({ filters, setFilters, products = [] }) {
                     ))}
                 </div>
 
-                {/* Apply / Reset */}
+                {/* Buttons */}
                 <div className="d-flex gap-2">
                     <button className="btn background-black w-100" onClick={applyFilters}>Apply</button>
                     <button className="btn btn-outline-secondary w-100" onClick={resetFilters}>Reset</button>

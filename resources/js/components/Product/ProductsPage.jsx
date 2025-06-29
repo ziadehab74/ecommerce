@@ -45,7 +45,11 @@ export default function ProductsPage() {
 
     return (
         <div className="container mt-5">
-            <SidebarFilters filters={filters} setFilters={setFilters} products={products} />
+            <SidebarFilters
+                filters={filters}
+                setFilters={setFilters}
+                products={products || []}
+            />
             <div className="row">
                 <div className={`bg-white rounded shadow p-2 col-12 ${Object.keys(order).length > 0 ? 'col-lg-9' : 'col-lg-12'} mb-4`}>
                     <SearchInput searchTerm={filters.searchTerm} onChange={term => setFilters({ ...filters, searchTerm: term })} />
