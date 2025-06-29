@@ -3,35 +3,34 @@ import ProductList from './ProductList.jsx';
 import SidebarFilters from './SideBarFilter.jsx';
 import SearchInput from './SearchInput.jsx';
 import Ordersummary from '../OrderSummary/OrderSummary.jsx';
-import useProductFilter from '../Product/hooks/useProductFilter.js';
 import axios from 'axios';
 
 export default function ProductsPage() {
-    const MIN = 0, MAX = 1000;
     const [products, setProducts] = useState([]);
     const [order, setOrder] = useState(() => JSON.parse(localStorage.getItem('order')) || []);
     const [filters, setFilters] = useState({
         searchTerm: '',
-        priceRange: [MIN, MAX],
+        priceRange: [0, 1000],
         category: []
     });
 
     const [currentPage, setCurrentPage] = useState(1);
-    const pageSize = 6; // products per page
-
-    const filteredProducts = useProductFilter(products, filters);
-    const totalPages = Math.ceil(filteredProducts.length / pageSize);
-
-    const paginatedProducts = filteredProducts.slice(
-        (currentPage - 1) * pageSize,
-        currentPage * pageSize
-    );
+    const [totalPages, setTotalPages] = useState(1);
+    const [totalResults, setTotalResults] = useState(0);
 
     useEffect(() => {
-        axios.get(`${window.Laravel.appUrl}/api/products`)
-            .then(res => setProducts(res.data.data))
+        axios.get(`${window.Laravel.appUrl}/api/products`, {
+            params: {
+                page: currentPage,
+            }
+        })
+            .then(res => {
+                setProducts(res.data.data);
+                setTotalPages(res.data.last_page);
+                setTotalResults(res.data.total);
+            })
             .catch(err => console.error('Fetch Error:', err));
-    }, []);
+    }, [currentPage, filters]);
 
     useEffect(() => {
         localStorage.setItem('order', JSON.stringify(order));
@@ -51,11 +50,10 @@ export default function ProductsPage() {
                 <div className={`bg-white rounded shadow p-2 col-12 ${Object.keys(order).length > 0 ? 'col-lg-9' : 'col-lg-12'} mb-4`}>
                     <SearchInput searchTerm={filters.searchTerm} onChange={term => setFilters({ ...filters, searchTerm: term })} />
                     <h5 className='p-2'>
-                        Products <span className="text-muted">({filteredProducts.length} results found)</span>
+                        Products <span className="text-muted">({totalResults} results found)</span>
                     </h5>
-                    <ProductList products={paginatedProducts} order={order} setOrder={setOrder} />
+                    <ProductList products={products} order={order} setOrder={setOrder} />
 
-                    {/* Pagination Controls */}
                     {totalPages > 1 && (
                         <div className="d-flex justify-content-center mt-4">
                             <nav>
@@ -88,4 +86,3 @@ export default function ProductsPage() {
         </div>
     );
 }
-``
