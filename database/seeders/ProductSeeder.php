@@ -15,7 +15,7 @@ class ProductSeeder extends Seeder
                 'price' => 29.99,
                 'category' => 'Electronics',
                 'stock' => 50,
-                'image' => 'products/mouse.jpg',
+                'image' => 'products/mouse.webp',
             ],
             [
                 'name' => 'Bluetooth Headphones',
@@ -29,14 +29,14 @@ class ProductSeeder extends Seeder
                 'price' => 12.49,
                 'category' => 'Kitchen',
                 'stock' => 100,
-                'image' => 'products/cofemug.jpg',
+                'image' => 'products/cofemug.webp',
             ],
             [
                 'name' => 'Desk Lamp',
                 'price' => 39.95,
                 'category' => 'Office',
                 'stock' => 25,
-                'image' => 'products/desklamp.jpg',
+                'image' => 'products/desklamp.webp',
             ],
             [
                 'name' => 'Notebook',
