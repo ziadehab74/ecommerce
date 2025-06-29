@@ -9,7 +9,7 @@ use App\Http\Controllers\API\AuthController;
 Route::get('/products', [ProductController::class, 'index']);
 
 // Auth routes
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
 Route::post('/register', [AuthController::class, 'register']);
 
 // Protected routes (requires Sanctum token)
