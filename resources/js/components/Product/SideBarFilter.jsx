@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Range } from 'react-range';
 
-export default function SidebarFilters({ filters, setFilters, products }) {
+export default function SidebarFilters({ filters, setFilters, products = [] }) {
     const MIN = 0, MAX = 1000;
     const [localFilters, setLocalFilters] = useState(filters);
     const [show, setShow] = useState(false);
-    const categories = [...new Set(products.map(p => p.category))];
+
+    // ✅ Safely map categories only if products is an array
+    const categories = Array.isArray(products)
+        ? [...new Set(products.map(p => p.category))].filter(Boolean)
+        : [];
 
     const applyFilters = () => {
         setFilters(localFilters);
@@ -19,7 +23,7 @@ export default function SidebarFilters({ filters, setFilters, products }) {
         setShow(false);
     };
 
-    // Lock background scroll when sidebar is open
+    // Lock scroll when sidebar is open
     useEffect(() => {
         document.body.style.overflow = show ? 'hidden' : 'auto';
         return () => {
@@ -29,7 +33,7 @@ export default function SidebarFilters({ filters, setFilters, products }) {
 
     return (
         <>
-            {/* Filter Button */}
+            {/* Filter Toggle Button */}
             <button
                 className="btn btn-xl position-fixed top-50 start-0 translate-middle-y z-3"
                 onClick={() => setShow(!show)}
@@ -125,7 +129,7 @@ export default function SidebarFilters({ filters, setFilters, products }) {
                     ))}
                 </div>
 
-                {/* Apply/Reset Buttons */}
+                {/* Apply / Reset */}
                 <div className="d-flex gap-2">
                     <button className="btn background-black w-100" onClick={applyFilters}>Apply</button>
                     <button className="btn btn-outline-secondary w-100" onClick={resetFilters}>Reset</button>
