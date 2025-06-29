@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import axios from 'axios';
 import Counter from '../Counter/Counter.jsx';
+import { useOrder } from '../../contexts/OrderContext';
 
-export default function Ordersummary({ order, products, handleIncrement, handleDecrement, setOrder, cart = false }) {
+export default function Ordersummary({ products, handleIncrement, handleDecrement, cart = false }) {
+    const { order, setOrder } = useOrder();
+
     if (Object.keys(order).length === 0) return null;
 
     const subtotal = products.reduce(
@@ -22,29 +25,27 @@ export default function Ordersummary({ order, products, handleIncrement, handleD
         try {
             const token = localStorage.getItem('token');
             const items = Object.entries(order).map(([productId, quantity]) => ({
-                id: parseInt(productId),        // ✅ Use "id" instead of "product_id"
+                id: parseInt(productId),
                 quantity
             }));
-            console.log(items, total);
 
             const response = await axios.post(`${window.Laravel.appUrl}/api/orders`, {
                 products: items,
                 subtotal,
                 tax,
                 shipping,
-                total: total
+                total
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
 
-
             alert('Order placed successfully!');
             localStorage.removeItem('order');
             localStorage.removeItem('totals');
             setOrder({});
-            window.location.href = '/products'; // or navigate to /orders
+            window.location.href = '/products';
         } catch (error) {
             console.error('Order failed', error);
             alert('Failed to place order');
@@ -65,12 +66,10 @@ export default function Ordersummary({ order, products, handleIncrement, handleD
                             <div className="row align-items-center ps-3">
                                 <div className="row">
                                     <small className="fw-semibold">{p.name}</small>
-
                                     <div className="col-auto m-1">
                                         <Counter product={p} order={order} setOrder={setOrder} />
                                     </div>
                                 </div>
-
                             </div>
                             <a
                                 style={{ color: 'red', cursor: 'pointer' }}

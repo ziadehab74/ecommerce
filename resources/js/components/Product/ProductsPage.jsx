@@ -44,7 +44,7 @@ export default function ProductsPage() {
     };
 
     return (
-        <div className="container mt-5">
+        <div className="container mt-3">
             <SidebarFilters
                 filters={filters}
                 setFilters={setFilters}
